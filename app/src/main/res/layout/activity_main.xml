@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.viewtest.MainActivity">
+
+
+    <ImageView
+        android:id="@+id/imageBase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
+        android:src="@drawable/dizuo"
+        android:layout_above="@+id/linearLayout"
+        android:layout_marginLeft="50dp" />
+
+    <ImageView
+        android:id="@+id/imageBig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dabi"
+        android:scaleType="fitCenter"
+        android:layout_toRightOf="@+id/imageBase"
+        android:layout_marginLeft="-25dp"
+        android:layout_above="@+id/imageBase"
+        android:layout_marginBottom="-25dp" />
+    <ImageView
+        android:id="@+id/imageSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/xiaobi"
+        android:layout_toRightOf="@+id/imageBig"
+        android:layout_alignBottom="@+id/imageBig" />
+
+    <ImageView
+        android:id="@+id/imageEnd"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/linearLayout"
+         />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout">
+
+        <Button
+            android:id="@+id/rotateBtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Rotate 45"
+            android:layout_weight="1"/>
+
+
+        <SeekBar
+            android:id="@+id/seekbarX"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:max="180" />
+        <SeekBar
+            android:id="@+id/seekbarY"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:max="360" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
