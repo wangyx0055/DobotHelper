@@ -1,5 +1,6 @@
 package com.example.dobothelper;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     private ImageView imageViewBig;
     private ImageView imageViewEnd;
     private Button rotateBtn;
+    private Button blueToothBtn;
     private Matrix matrix=new Matrix();
     private float angle=0;
     private Animation animation;
@@ -52,8 +54,15 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         SeekBar seekBar=(SeekBar)findViewById(R.id.seekbarX);
         seekBar.setProgress(90);
         seekBar.setOnSeekBarChangeListener(this);
-        //Button btn4 = (Button)findViewById(R.id.btn4);
+        blueToothBtn = (Button) findViewById(R.id.bluetoothBtn);
         rotateBtn=(Button)findViewById(R.id.rotateBtn);
+        blueToothBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SearchDeviceActivity.class);
+                startActivity(intent);
+            }
+        });
         rotateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
