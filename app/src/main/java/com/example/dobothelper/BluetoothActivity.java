@@ -91,16 +91,16 @@ public class BluetoothActivity extends Activity {
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
-                if (BluetoothMsg.serviceOrCilent == BluetoothMsg.ServerOrCilent.CILENT)
+                if (BluetoothMsg.serviceOrClient == BluetoothMsg.ServerOrClient.CLIENT)
                 {
                     shutdownClient();
                 }
-                else if (BluetoothMsg.serviceOrCilent == BluetoothMsg.ServerOrCilent.SERVICE)
+                else if (BluetoothMsg.serviceOrClient == BluetoothMsg.ServerOrClient.SERVICE)
                 {
                     shutdownServer();
                 }
                 BluetoothMsg.isOpen = false;
-                BluetoothMsg.serviceOrCilent=BluetoothMsg.ServerOrCilent.NONE;
+                BluetoothMsg.serviceOrClient= BluetoothMsg.ServerOrClient.NONE;
                 Toast.makeText(mContext, "已断开连接！", Toast.LENGTH_SHORT).show();
             }
         });
@@ -126,14 +126,14 @@ public class BluetoothActivity extends Activity {
     @Override
     protected void onResume() {
 
-        BluetoothMsg.serviceOrCilent=BluetoothMsg.ServerOrCilent.CILENT;
+        BluetoothMsg.serviceOrClient= BluetoothMsg.ServerOrClient.CLIENT;
 
         if(BluetoothMsg.isOpen)
         {
             Toast.makeText(mContext, "连接已经打开，可以通信。如果要再建立连接，请先断开！", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(BluetoothMsg.serviceOrCilent==BluetoothMsg.ServerOrCilent.CILENT)
+        if(BluetoothMsg.serviceOrClient== BluetoothMsg.ServerOrClient.CLIENT)
         {
             String address = BluetoothMsg.BlueToothAddress;
             if(!address.equals("null"))
@@ -148,7 +148,7 @@ public class BluetoothActivity extends Activity {
                 Toast.makeText(mContext, "address is null !", Toast.LENGTH_SHORT).show();
             }
         }
-        else if(BluetoothMsg.serviceOrCilent==BluetoothMsg.ServerOrCilent.SERVICE)
+        else if(BluetoothMsg.serviceOrClient== BluetoothMsg.ServerOrClient.SERVICE)
         {
             startServerThread = new ServerThread();
             startServerThread.start();
@@ -352,16 +352,16 @@ public class BluetoothActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
 
-        if (BluetoothMsg.serviceOrCilent == BluetoothMsg.ServerOrCilent.CILENT)
+        if (BluetoothMsg.serviceOrClient == BluetoothMsg.ServerOrClient.CLIENT)
         {
             shutdownClient();
         }
-        else if (BluetoothMsg.serviceOrCilent == BluetoothMsg.ServerOrCilent.SERVICE)
+        else if (BluetoothMsg.serviceOrClient == BluetoothMsg.ServerOrClient.SERVICE)
         {
             shutdownServer();
         }
         BluetoothMsg.isOpen = false;
-        BluetoothMsg.serviceOrCilent = BluetoothMsg.ServerOrCilent.NONE;
+        BluetoothMsg.serviceOrClient = BluetoothMsg.ServerOrClient.NONE;
     }
 
 

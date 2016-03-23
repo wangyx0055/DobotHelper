@@ -9,13 +9,13 @@ public class BluetoothMsg {
      * @author Andy
      *
      */
-    public enum ServerOrCilent{
+    public enum ServerOrClient {
         NONE,
         SERVICE,
-        CILENT
-    };
+        CLIENT
+    }
     //蓝牙连接方式
-    public static ServerOrCilent serviceOrCilent = ServerOrCilent.NONE;
+    public static ServerOrClient serviceOrClient = ServerOrClient.NONE;
     //连接蓝牙地址
     public static String BlueToothAddress = null,lastblueToothAddress=null;
     //通信线程是否开启

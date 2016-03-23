@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     private float angle=0;
     private Animation animation;
     private Animation translate;
+    //formation of degree
     DecimalFormat df = new DecimalFormat("#0.00");
 
     private float bigRotateDegree;
