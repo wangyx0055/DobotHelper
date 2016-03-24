@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -20,7 +24,7 @@ import android.widget.SeekBar;
 
 import java.text.DecimalFormat;
 
-public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener{
+public class MainActivity extends ActionBarActivity implements SeekBar.OnSeekBarChangeListener{
 
     private int screenWidth = 0;
     private int screenHeight = 0;
@@ -43,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         //设置全屏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         // 获取屏幕大小
@@ -58,15 +64,20 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         SeekBar seekBar=(SeekBar)findViewById(R.id.seekbarX);
         seekBar.setProgress(90);
         seekBar.setOnSeekBarChangeListener(this);
-        blueToothBtn = (Button) findViewById(R.id.bluetoothBtn);
-        rotateBtn=(Button)findViewById(R.id.rotateBtn);
-        blueToothBtn.setOnClickListener(new View.OnClickListener() {
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SearchDeviceActivity.class);
-                startActivity(intent);
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId())
+                {
+                    case R.id.menu_item_bluetooth:
+                        Intent intent = new Intent(MainActivity.this, SearchDeviceActivity.class);
+                        startActivity(intent);
+                        break;
+                }
+                return true;
             }
         });
+        rotateBtn=(Button)findViewById(R.id.rotateBtn);
         rotateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +121,12 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
             }
         });
 
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_action,menu);
+        return true;
     }
 
     @Override
