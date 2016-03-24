@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //设置全屏
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         // 获取屏幕大小
         screenWidth = getResources().getDisplayMetrics().widthPixels;
         screenHeight = getResources().getDisplayMetrics().heightPixels;
@@ -188,11 +191,12 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
                 downY = event.getRawY();
                 break;
             case MotionEvent.ACTION_MOVE:
-                moveX = event.getRawX()-320;
-                moveY = event.getRawY()-200;
+                moveX = event.getX();
+                moveY = event.getY();
                 setRotate(0, 100);
-                imageViewSmall.setX(moveX);
-                imageViewSmall.setY(moveY);
+                imageViewSmall.setX(moveX-300);
+                imageViewSmall.setY(moveY-220);
+
 
                 break;
             case MotionEvent.ACTION_UP:

@@ -15,4 +15,6 @@ public class ExchangeService extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
+
+    //TODO 后台服务，处理数据与蓝牙进行通讯
 }

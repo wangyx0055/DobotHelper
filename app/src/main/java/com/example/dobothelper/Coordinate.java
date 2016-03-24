@@ -10,4 +10,5 @@ public class Coordinate {
 
     public Coordinate() {
     }
+    //TODO 建立机械臂姿态坐标，有输入、计算、输出、纠正等方法
 }
