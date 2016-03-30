@@ -24,7 +24,7 @@ import android.widget.SeekBar;
 
 import java.text.DecimalFormat;
 
-public class MainActivity extends ActionBarActivity implements SeekBar.OnSeekBarChangeListener{
+public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener{
 
     private int screenWidth = 0;
     private int screenHeight = 0;
@@ -67,10 +67,15 @@ public class MainActivity extends ActionBarActivity implements SeekBar.OnSeekBar
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                Intent intent;
                 switch (item.getItemId())
                 {
                     case R.id.menu_item_bluetooth:
-                        Intent intent = new Intent(MainActivity.this, SearchDeviceActivity.class);
+                        intent = new Intent(MainActivity.this, SearchDeviceActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.menu_item_tester:
+                        intent = new Intent(MainActivity.this, TesterActivity.class);
                         startActivity(intent);
                         break;
                 }
@@ -207,11 +212,13 @@ public class MainActivity extends ActionBarActivity implements SeekBar.OnSeekBar
                 downY = event.getRawY();
                 break;
             case MotionEvent.ACTION_MOVE:
-                moveX = event.getX();
-                moveY = event.getY();
-                setRotate(0, 100);
-                imageViewSmall.setX(moveX-300);
-                imageViewSmall.setY(moveY-220);
+//                moveX = event.getX();
+//                moveY = event.getY();
+//                setRotate(0, 100);
+//                imageViewSmall.setX(moveX-300);
+//                imageViewSmall.setY(moveY-220);
+
+              //  imageViewSmall.
 
 
                 break;
