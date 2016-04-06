@@ -70,6 +70,10 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
                 Intent intent;
                 switch (item.getItemId())
                 {
+                    case R.id.menu_item_path_mode:
+                        intent = new Intent(MainActivity.this, CanvasActivity.class);
+                        startActivity(intent);
+                        break;
                     case R.id.menu_item_bluetooth:
                         intent = new Intent(MainActivity.this, SearchDeviceActivity.class);
                         startActivity(intent);

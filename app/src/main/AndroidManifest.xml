@@ -23,7 +23,11 @@
         <activity
             android:name=".SearchDeviceActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".TesterActivity" android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".TesterActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".CanvasActivity"
+                android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>
