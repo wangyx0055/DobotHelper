@@ -6,14 +6,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.SurfaceHolder;
 import android.view.View;
 
 /**
@@ -21,11 +16,13 @@ import android.view.View;
  */
 public class PaintView extends View {
 
+
+    private boolean isDraw = false;
     private Canvas mCanvas;
     private Bitmap mBitmap;  //缓存绘制的内容
     private Bitmap backBitmap;
     private Path mPath;
-    private Paint paint=new Paint();
+    private Paint paint = new Paint();
     //清屏
 
     Paint redPaint=new Paint();
@@ -34,7 +31,7 @@ public class PaintView extends View {
     Path bigPath = new Path();
     Path smallPath = new Path();
 
-
+    float mouseX, mouseY;
 
     private int mLastX;
     private int mLastY;
@@ -71,7 +68,28 @@ public class PaintView extends View {
         //canvas.drawColor(Color.WHITE)
         canvas.drawPath(bigPath, bluePaint);
         canvas.drawPath(smallPath, redPaint);
+        if (isDraw) {
+            float distance = (float) Math.sqrt((mouseX - 100)*(mouseX - 100)+(mouseY-300)*(mouseY-300));
+            float scale = 300 / distance;
+            if (mouseY > 300 || mouseX > 300) {
+                float x = mouseX * scale;
+                float y = mouseY * scale;
+                canvas.drawLine(100, 300, x, y, bluePaint);
+            }
+        }
     }
+
+//    private void drawLine() {
+//        float thirdLength=(float)Math.sqrt((x - 0) * (x - 0) + (y - 0) * (y - 0));
+//        bigRotateDegree=(float)Math.acos(((100 * 100 + thirdLength * thirdLength - 100 * 100)/2*100*thirdLength));
+//        smallRotateDegree=(float)Math.acos(((100 * 100 + thirdLength * thirdLength - 100*100)/2*100*thirdLength));
+//        float big=(float)Math.toDegrees(bigRotateDegree);
+//        float small=(float)Math.toDegrees(smallRotateDegree);
+//        float thirdAngle=180-big-small;
+//        String str_big = df.format(big);
+//        String str_small = df.format(small);
+//        Log.i("====setRotate====","small:"+str_small+"  big:"+str_big+" third:"+thirdLength);
+//    }
 
     //绘制线条
     private void setXY(int x,int y){
@@ -99,36 +117,46 @@ public class PaintView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        int action = event.getAction();
-        int x = (int) event.getX();
-        int y = (int) event.getY();
 
-        switch (action)
+//        int x = (int) event.getX();
+//        int y = (int) event.getY();
+
+        mouseX = event.getX();
+        mouseY = event.getY();
+
+
+        switch (event.getAction())
         {
             case MotionEvent.ACTION_DOWN:
-                setXY(x,y);
-                Log.d("PaintView","LX:"+mLastX);
-                Log.d("PaintView", "LY:" + mLastY);
-                Log.d("PaintView","TX:"+x);
-                Log.d("PaintView", "TY:" + y);
-                bigPath.moveTo(100,300);
-                bigPath.lineTo(mLastX, mLastY);
-                smallPath.moveTo(mLastX, mLastY);
-                smallPath.lineTo(x,y);
+//                setXY(x,y);
+//                Log.d("PaintView","LX:"+mLastX);
+//                Log.d("PaintView", "LY:" + mLastY);
+//                Log.d("PaintView","TX:"+x);
+//                Log.d("PaintView", "TY:" + y);
+//                bigPath.moveTo(100,300);
+//                bigPath.lineTo(mLastX, mLastY);
+//                smallPath.moveTo(mLastX, mLastY);
+//                smallPath.lineTo(x,y);
+
+                isDraw = true;
                 break;
             case MotionEvent.ACTION_MOVE:
 
                 //mLastX = x;
                 //mLastY = y;
+                if (isDraw) {
+
+                }
 
                 break;
             case MotionEvent.ACTION_UP:
                 //mPath.moveTo(mLastX, mLastY);
-                bigPath.moveTo(100, 300);
+//                bigPath.moveTo(100, 300);
+                isDraw = false;
                 break;
 
         }
-        invalidate();
+        this.postInvalidate();
         return true;
     }
 }
