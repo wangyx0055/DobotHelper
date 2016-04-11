@@ -6,10 +6,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by XuToTo on 2016/3/2 0002.
@@ -35,6 +38,9 @@ public class PaintView extends View {
 
     private int mLastX;
     private int mLastY;
+
+
+
     public PaintView(Context context, AttributeSet attrs) {
         super(context, attrs);
         //mPath = new Path();
@@ -66,21 +72,31 @@ public class PaintView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         //canvas.drawColor(Color.WHITE)
-        canvas.drawPath(bigPath, bluePaint);
-        canvas.drawPath(smallPath, redPaint);
+        //canvas.drawPath(bigPath, bluePaint);
+        //canvas.drawPath(smallPath, redPaint);
         if (isDraw) {
             float distance = (float) Math.sqrt((mouseX - 100)*(mouseX - 100)+(mouseY-300)*(mouseY-300));
+            float thirdLength = (float) Math.sqrt((mouseX - 135) * (mouseX - 135) + (mouseY - 500) * (mouseY - 500));
+
             float scale = 300 / distance;
-            if (mouseY > 300 || mouseX > 300) {
+            if (thirdLength <= (135 + 160)) {
+
                 float x = mouseX * scale;
                 float y = mouseY * scale;
-                canvas.drawLine(100, 300, x, y, bluePaint);
+
+                canvas.drawCircle(135, 500, 135, bluePaint);
+                canvas.drawCircle(mouseX, mouseY, 160, redPaint);
+//                canvas.drawLine(100, 300, mouseX+100, mouseY+200, bluePaint);
+//                canvas.drawLine(mouseX+100, mouseY+200, mouseX, mouseY, redPaint);
+            } else {
+                Toast.makeText(getContext(), "Out of range!", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-//    private void drawLine() {
-//        float thirdLength=(float)Math.sqrt((x - 0) * (x - 0) + (y - 0) * (y - 0));
+    private void drawLine() {
+        float thirdLength = (float) Math.sqrt((mouseX - 100) * (mouseX - 100) + (mouseY - 300) * (mouseY - 300));
+
 //        bigRotateDegree=(float)Math.acos(((100 * 100 + thirdLength * thirdLength - 100 * 100)/2*100*thirdLength));
 //        smallRotateDegree=(float)Math.acos(((100 * 100 + thirdLength * thirdLength - 100*100)/2*100*thirdLength));
 //        float big=(float)Math.toDegrees(bigRotateDegree);
@@ -89,8 +105,11 @@ public class PaintView extends View {
 //        String str_big = df.format(big);
 //        String str_small = df.format(small);
 //        Log.i("====setRotate====","small:"+str_small+"  big:"+str_big+" third:"+thirdLength);
-//    }
+    }
 
+    private void  drawPoint() {
+
+    }
     //绘制线条
     private void setXY(int x,int y){
         int startX=100;
@@ -145,7 +164,8 @@ public class PaintView extends View {
                 //mLastX = x;
                 //mLastY = y;
                 if (isDraw) {
-
+                    CanvasActivity.xCoorView.setText(mouseX+"");
+                    CanvasActivity.yCoorView.setText(mouseY+"");
                 }
 
                 break;

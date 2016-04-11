@@ -1,43 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context="com.example.dobothelper.CanvasActivity">
-
-    <ImageView
-        android:id="@+id/imageBase"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="fitCenter"
-        android:src="@drawable/dizuo"
-        android:layout_above="@+id/linearLayout"
-        android:layout_marginLeft="50dp" />
-
-    <ImageView
-        android:id="@+id/imageBig"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/dabi"
-        android:scaleType="fitCenter"
-        android:layout_toRightOf="@+id/imageBase"
-        android:layout_marginLeft="-25dp"
-        android:layout_above="@+id/imageBase"
-        android:layout_marginBottom="-25dp" />
-    <ImageView
-        android:id="@+id/imageSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/xiaobi"
-        android:layout_toRightOf="@+id/imageBig"
-        android:layout_alignBottom="@+id/imageBig" />
 
 
     <com.example.dobothelper.PaintView
+        android:layout_weight="1"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </com.example.dobothelper.PaintView>
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/mouseX"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:gravity="center"
+            android:text="N/A"/>
+        <TextView
+            android:id="@+id/mouseY"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:gravity="center"
+            android:text="N/A"/>
+    </LinearLayout>
+
+</LinearLayout>
